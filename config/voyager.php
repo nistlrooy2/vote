@@ -192,11 +192,14 @@ return [
 
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
-        //'css/custom.css',
+        'css/jquery-ui.min.css',
+        'jquery-ui.theme.min.css',
+        //'jquery-ui.structure.min.css',
     ],
 
     'additional_js' => [
-        //'js/custom.js',
+        'js/jquery-3.6.0.min.js',
+        'jquery-ui.min.js',
     ],
 
     'googlemaps' => [
