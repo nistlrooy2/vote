@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('title',128);
             $table->text('description');//描述
-            $table->unsignedBigInteger('votes_id');//外键关联votes的id
+            $table->unsignedBigInteger('vote_list_id');
             $table->unsignedTinyInteger('selectable_number')->default(1);//可选个数
             $table->timestamps();
 
-            $table->foreign('votes_id')->references('id')->on('votes');
+            //$table->foreign('vote_list_id')->references('id')->on('vote_list');
         });
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('vote_id');//对应的投票id
             $table->timestamps();
 
-            $table->foreign('vote_id')->references('id')->on('vote');
+            //$table->foreign('vote_id')->references('id')->on('vote');
         });
     }
 

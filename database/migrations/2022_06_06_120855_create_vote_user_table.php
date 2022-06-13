@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('check_code');//校验码
             $table->timestamps();
 
-            $table->foreign('vote_id')->references('id')->on('vote');
-            $table->foreign('option_id')->references('id')->on('vote_option');
-            $table->foreign('user_id')->references('id')->on('users');
+            //$table->foreign('vote_id')->references('id')->on('vote');
+            //$table->foreign('option_id')->references('id')->on('vote_option');
+            //$table->foreign('user_id')->references('id')->on('users');
 
         });
     }

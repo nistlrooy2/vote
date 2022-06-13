@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('votes');
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::dropIfExists('vote_list');
+        Schema::create('vote_list', function (Blueprint $table) {
             $table->id();
             $table->string('title',128)->unique();//投票标题
             $table->text('description');//描述
@@ -23,7 +23,7 @@ return new class extends Migration
             //$table->unsignedBigInteger('position_level_id');//所处职位等级
             $table->timestamps();
 
-            $table->foreign('partment_id')->references('id')->on('user_partment');
+            //$table->foreign('partment_id')->references('id')->on('user_partment');
             
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('vote_list');
     }
 };

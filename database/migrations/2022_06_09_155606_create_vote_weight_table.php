@@ -20,8 +20,8 @@ return new class extends Migration
             $table->Float('weight');//权重
             $table->timestamps();
 
-            $table->foreign('vote_id')->references('id')->on('vote');
-            $table->foreign('position_level_id')->references('id')->on('user_position_level');
+            //$table->foreign('vote_id')->references('id')->on('vote');
+            //$table->foreign('position_level_id')->references('id')->on('user_position_level');
         });
     }
 

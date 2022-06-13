@@ -26,8 +26,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('partment_id')->references('id')->on('user_partment');
-            $table->foreign('position_level_id')->references('id')->on('user_position_level');
+            //$table->foreign('partment_id')->references('id')->on('user_partment');
+            //$table->foreign('position_level_id')->references('id')->on('user_position_level');
         });
     }
 
