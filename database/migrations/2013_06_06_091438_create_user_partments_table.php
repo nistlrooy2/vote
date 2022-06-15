@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        //Schema::dropIfExists('user_partment');
-        Schema::create('user_partment', function (Blueprint $table) {
+        //Schema::dropIfExists('user_partments');
+        Schema::create('user_partments', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);//部门名
             $table->unsignedBigInteger('parent_id');//上一级部门id
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_partment');
+        Schema::dropIfExists('user_partments');
     }
 };

@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vote_user', function (Blueprint $table) {
+        Schema::create('votes_users', function (Blueprint $table) {
             $table->unsignedBigInteger('vote_id');//投票id
             $table->unsignedBigInteger('option_id');//选项id
             $table->unsignedBigInteger('user_id');//用户id
             $table->string('check_code');//校验码
             $table->timestamps();
 
-            //$table->foreign('vote_id')->references('id')->on('vote');
-            //$table->foreign('option_id')->references('id')->on('vote_option');
+            //$table->foreign('vote_id')->references('id')->on('votes');
+            //$table->foreign('option_id')->references('id')->on('votes_options');
             //$table->foreign('user_id')->references('id')->on('users');
 
         });
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vote_user');
+        Schema::dropIfExists('votes_users');
     }
 };

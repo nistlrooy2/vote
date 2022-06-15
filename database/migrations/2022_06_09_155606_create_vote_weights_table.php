@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vote_weight', function (Blueprint $table) {
+        Schema::create('vote_weights', function (Blueprint $table) {
             //$table->id();
             $table->unsignedBigInteger('vote_id');
             $table->unsignedBigInteger('position_level_id');//职位id
             $table->Float('weight');//权重
             $table->timestamps();
 
-            //$table->foreign('vote_id')->references('id')->on('vote');
-            //$table->foreign('position_level_id')->references('id')->on('user_position_level');
+            //$table->foreign('vote_id')->references('id')->on('votes');
+            //$table->foreign('position_level_id')->references('id')->on('user_position_levels');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vote_weight');
+        Schema::dropIfExists('vote_weights');
     }
 };

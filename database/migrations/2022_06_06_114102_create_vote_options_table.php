@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vote', function (Blueprint $table) {
+        Schema::create('vote_options', function (Blueprint $table) {
             $table->id();
-            $table->string('title',128);
-            $table->text('description');//描述
-            $table->unsignedBigInteger('vote_list_id');
-            $table->unsignedTinyInteger('selectable_number')->default(1);//可选个数
+            $table->string('value',50);//选项内容
+            $table->unsignedBigInteger('vote_id');//对应的投票id
             $table->timestamps();
 
-            //$table->foreign('vote_list_id')->references('id')->on('vote_list');
+            //$table->foreign('vote_id')->references('id')->on('votes');
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vote');
+        Schema::dropIfExists('vote_options');
     }
 };

@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('user_position_level');
-        Schema::create('user_position_level', function (Blueprint $table) {
+        Schema::dropIfExists('user_position_levels');
+        Schema::create('user_position_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');//职位名
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_position_level');
+        Schema::dropIfExists('user_position_levels');
     }
 };

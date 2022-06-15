@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vote_result', function (Blueprint $table) {
+        Schema::create('vote_results', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vote_list_id');
             $table->unsignedBigInteger('vote_id')->unique();//外键关联vote的id
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('check_code');//校验码
             $table->timestamps();
 
-            //$table->foreign('vote_id')->references('id')->on('vote');
-            //$table->foreign('vote_list_id')->references('id')->on('vote_list');
+            //$table->foreign('vote_id')->references('id')->on('votes');
+            //$table->foreign('vote_list_id')->references('id')->on('vote_lists');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vote_result');
+        Schema::dropIfExists('vote_results');
     }
 };
