@@ -4,6 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * 权重表
+ * 根据职位不同，可以设置不同权重
+ */
 return new class extends Migration
 {
     /**
@@ -14,7 +18,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vote_weights', function (Blueprint $table) {
-            //$table->id();
+            $table->id();
             $table->unsignedBigInteger('vote_id');
             $table->unsignedBigInteger('position_level_id');//职位id
             $table->Float('weight');//权重

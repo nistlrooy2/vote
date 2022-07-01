@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', '评测投票系统'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
     */
 
     //'locale' => 'en',
-    'locale' => 'cn',
+    'locale' => 'zh_CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +196,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,//clock work for debug
 
     ],
 
@@ -212,6 +213,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Clockwork' => Clockwork\Support\Laravel\Facade::class,//clock work for debug
     ])->toArray(),
+    
 
 ];

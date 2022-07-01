@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserInfomationController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VoteListController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,17 +16,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('/test', [UserInfomationController::class, 'indexall']);
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/voteList/index/{id}', [VoteListController::class,'voteListIndex']);
+    Route::get('/voteList/create', [VoteListController::class,'voteListCreate'])->name('voteListCreate');
+    Route::post('/voteList/store', [VoteListController::class,'voteListStore'])->name('voteListStore');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+

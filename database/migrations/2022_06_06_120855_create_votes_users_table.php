@@ -4,6 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * 用户投票信息表
+ * 记录用户每个投票选择结果
+ */
 return new class extends Migration
 {
     /**
@@ -14,6 +18,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('votes_users', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('vote_id');//投票id
             $table->unsignedBigInteger('option_id');//选项id
             $table->unsignedBigInteger('user_id');//用户id

@@ -4,6 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * 投票选项表
+ * 一个投票包含数个投票选项
+ */
 return new class extends Migration
 {
     /**

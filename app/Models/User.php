@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\UserPartment;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -41,4 +43,14 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 每个用户都有一个用户信息表
+     */
+    public function userInfomation()
+    {
+        return $this->hasOne(UserInfomation::class,'id','id');
+    }
+
+
 }

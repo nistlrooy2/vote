@@ -13,9 +13,20 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('zh_CN.Dash board') }}
                     </x-nav-link>
                 </div>
+
+                <!-- Navigation Links -->
+                @if(Auth::user()->hasPermission('add_vote_lists'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('voteListCreate')" :active="request()->routeIs('voteListCreate')">
+                            {{ __('zh_CN.create votelist') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+                
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,6 +45,14 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <!-- admin -->
+                        @if (session('is_admin'))
+                            <x-dropdown-link :href="url('admin')"
+                                onclick="window.location.href=url('admin')">
+                            {{ __('zh_CN.Admin Panle') }}
+                            </x-dropdown-link>
+                        @endif   
+                        
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -41,9 +60,10 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('zh_CN.Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -64,9 +84,17 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('zh_CN.Dash board') }}
             </x-responsive-nav-link>
         </div>
+        
+        @if(Auth::user()->hasPermission('add_vote_lists'))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('voteListCreate')" :active="request()->routeIs('voteListCreate')">
+                    {{ __('zh_CN.create votelist') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -76,6 +104,15 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <!-- admin -->
+                @if (session('is_admin'))
+                <x-dropdown-link :href="url('admin')"
+                    onclick="window.location.href=url('admin')">
+                {{ __('zh_CN.Admin Panle') }}
+                </x-dropdown-link>
+            @endif   
+            </div>
+            <div class="mt-3 space-y-1">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -83,7 +120,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('zh_CN.Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

@@ -13,6 +13,7 @@ return [
     'user' => [
         'add_default_role_on_register' => true,
         'default_role'                 => 'user',
+        'namespace'                    => App\Models\User::class,
         'default_avatar'               => 'users/default.png',
         'redirect'                     => '/admin',
     ],
@@ -27,8 +28,8 @@ return [
     */
 
     'controllers' => [
-        'namespace' => 'TCG\\Voyager\\Http\\Controllers',
-        //'namespace' => 'App\\Http\\Controllers',
+        //'namespace' => 'TCG\\Voyager\\Http\\Controllers',
+        'namespace' => 'App\\Http\\Controllers',
     ],
 
     /*
@@ -43,7 +44,7 @@ return [
     */
 
     'models' => [
-        //'namespace' => 'App\\Models\\',
+        'namespace' => 'App\\Models\\',
     ],
 
     /*
@@ -197,13 +198,16 @@ return [
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
         'css/jquery-ui.min.css',
-        'jquery-ui.theme.min.css',
+        'css/jquery-ui.theme.min.css',
         //'jquery-ui.structure.min.css',
+        //'css/bootstrap.min.css',
+        //'css/bootstrap-theme.min.css',
     ],
 
     'additional_js' => [
         'js/jquery-3.6.0.min.js',
-        'jquery-ui.min.js',
+        'js/jquery-ui.min.js',
+        //'js/bootstrap.min.js',
     ],
 
     'googlemaps' => [
