@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VoteList;
 use App\Models\UserPartment;
 use App\Models\UserInfomation;
+use App\Models\VoteUser;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -52,10 +53,24 @@ class DashboardController extends Controller
                             ->where('end_time', '>', now())
                             ->where('is_anonymous',$is_anonymous)
                             ->get();
-        //$number = $voteList->count();
+        $voted_list = collect([]);
+        foreach($voteList as $list)
+        {
+
+            $voted = VoteUser::where('user_id',Auth::id())
+                            ->where('vote_list_id',$list['id'])
+                            ->first();
+            if($voted!=null)
+                $voted_list->push(1);//means this has been voted
+            else
+                $voted_list->push(0);      
+        }
+        //get this user voted info
+        //$voted = VoteUser::where('user_id',Auth::id())->get();
+
 
         return view('dashboard',compact('partment_id_collect',
-                                        'voteList',));
+                                        'voteList','voted_list'));
     }
 
 }

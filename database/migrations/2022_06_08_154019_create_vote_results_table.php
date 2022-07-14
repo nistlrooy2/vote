@@ -19,8 +19,8 @@ return new class extends Migration
     {
         Schema::create('vote_results', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vote_list_id');
-            $table->unsignedBigInteger('vote_id')->unique();//外键关联vote的id
+            $table->unsignedBigInteger('vote_list_id')->unique();
+            //$table->unsignedBigInteger('vote_id')->unique();//外键关联vote的id
             $table->text('result');//结果用json存储
             $table->string('check_code');//校验码
             $table->timestamps();

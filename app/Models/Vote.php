@@ -10,6 +10,18 @@ class Vote extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'vote_list_id',
+        'selectable_number',
+    ];
+
+    /**
      * vote belongs to vote list
      */
     public function voteList()
@@ -20,7 +32,7 @@ class Vote extends Model
     /**
      * vote has many options
      */
-    public function votOption()
+    public function voteOption()
     {
         return $this->hasMany(VoteOption::class,'vote_id','id');
     }
@@ -28,6 +40,14 @@ class Vote extends Model
     public function voteResult()
     {
         return $this->hasOne(VoteResult::class,'vote_id','id');
+    }
+
+    /**
+     * many to many
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'votes_users', 'vote_id', 'user_id');
     }
 
     

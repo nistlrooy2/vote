@@ -16,7 +16,11 @@
                     
                     @if ($partment_id_collect->contains($vote['partment_id']) || $vote['is_anonymous'] == 1)
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a href="{{ url('/voteList/'.$vote['id']) }}">{{ $vote['title'] }}</a>
+                            @if($voted_list[$loop->index]==0)
+                                <a href="{{ url('/voteList/index/'.$vote['id']) }}">{{ $vote['title'] }}</a><span class="deadline">({{__("zh_CN.deadline")}}{{$vote['end_time']}})</span>
+                            @else
+                                <span class="voted">{{ $vote['title'] }}({{ __("zh_CN.has been voted") }})</span><span class="deadline">({{__("zh_CN.deadline")}}{{$vote['end_time']}})</span>
+                            @endif
                         </div>
                         @php
                             $number++;
@@ -27,14 +31,19 @@
 
                 @if($number > 0)
                     <div class="p-6 bg-white border-b border-gray-200">
-                        votelistNumber:{{ $number }}
+                        {{__('zh_CN.count of vote list before deadline')}}:{{ $number }}
                     </div>
                 @else
                     <div class="p-6 bg-white border-b border-gray-200">
-                        {{ __('there is no vote right now')}}
+                        {{ __('zh_CN.there is no vote right now')}}
                     </div>
                 @endif
             </div>
         </div>
     </div>
+    {{-- css only in this page --}}
+    <style>
+        .deadline{float: right;}
+        .voted{color:gray;}
+    </style>
 </x-app-layout>

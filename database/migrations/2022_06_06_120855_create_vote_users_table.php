@@ -17,8 +17,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('votes_users', function (Blueprint $table) {
+        Schema::create('vote_users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('vote_list_id');//投票活动id
             $table->unsignedBigInteger('vote_id');//投票id
             $table->unsignedBigInteger('option_id');//选项id
             $table->unsignedBigInteger('user_id');//用户id
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votes_users');
+        Schema::dropIfExists('vote_users');
     }
 };

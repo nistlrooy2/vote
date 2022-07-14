@@ -25,6 +25,21 @@
                         </x-nav-link>
                     </div>
                 @endif
+
+                 <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('voteResultList')" :active="request()->routeIs('voteResultList')">
+                            {{ __('zh_CN.vote result') }}
+                        </x-nav-link>
+                    </div>
+
+                @if(Auth::user()->hasPermission('add_users'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('anonymousCreate')" :active="request()->routeIs('anonymousCreate')">
+                            {{ __('zh_CN.anonymous') }}
+                        </x-nav-link>
+                    </div>
+                @endif
                 
 
             </div>
@@ -92,6 +107,20 @@
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('voteListCreate')" :active="request()->routeIs('voteListCreate')">
                     {{ __('zh_CN.create votelist') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('voteResultList')" :active="request()->routeIs('voteResultList')">
+                {{ __('zh_CN.vote result') }}
+            </x-responsive-nav-link>
+        </div>
+
+        @if(Auth::user()->hasPermission('add_users'))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('anonymousCreate')" :active="request()->routeIs('anonymousCreate')">
+                    {{ __('zh_CN.anonymous') }}
                 </x-responsive-nav-link>
             </div>
         @endif

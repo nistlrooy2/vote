@@ -14,14 +14,14 @@
         
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.datetimepicker.js') }}"></script>
+        
         <script src="{{ asset('js/app.js')}}"defer></script>
 
         <!-- Styles -->
         
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.css') }}">
+        
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         

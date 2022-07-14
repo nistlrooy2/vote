@@ -19,7 +19,7 @@ return new class extends Migration
     {
         Schema::create('anonymous_users', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('password');
             $table->boolean('has_voted');//是否已投票
             $table->timestamps();

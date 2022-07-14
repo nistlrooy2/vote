@@ -19,7 +19,7 @@ return new class extends Migration
     {
         Schema::create('vote_weights', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vote_id');
+            //$table->unsignedBigInteger('vote_id');
             $table->unsignedBigInteger('position_level_id');//职位id
             $table->Float('weight');//权重
             $table->timestamps();

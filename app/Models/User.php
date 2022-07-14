@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\UserPartment;
+use App\Models\Vote;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -52,5 +53,9 @@ class User extends \TCG\Voyager\Models\User
         return $this->hasOne(UserInfomation::class,'id','id');
     }
 
+    public function votes()
+    {
+        return $this->belongsToMany(Vote::class, 'votes_users', 'user_id', 'vote_id');
+    }
 
 }

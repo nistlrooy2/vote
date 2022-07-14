@@ -10,7 +10,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">  
-                    <form action="{{ route('voteListStore') }}" method="POST">  
+                    {{-- validate errors --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ route('voteListStore') }}" method="POST" id="votelist_form">  
                         @csrf
                         <div id="votelist">
                             <h3>{{__("zh_CN.create votelist")}}</h3>
@@ -18,19 +28,19 @@
                                 <table>   
                                     <tr>
                                         <td><label for="votelist_title">{{__("zh_CN.title")}}</label></td>
-                                        <td><input type="text" id ="votelist_title" name="votelist_title" value="{{ old('votelist_title') }}"></td>
+                                        <td><input type="text" id ="votelist_title" name="votelist_title" value="{{ old('votelist_title') }}" required></td>
                                     </tr>
                                     <tr>
                                         <td><label for="votelist_description">{{__("zh_CN.description")}}</label></td>
-                                        <td><textarea rows="5" cols="30" id="votelist_description" name="votelist_description">{{ old('votelist_description') }}</textarea></td>  
+                                        <td><textarea rows="5" cols="30" id="votelist_description" name="votelist_description" required>{{ old('votelist_description') }}</textarea></td>  
                                     </tr>
                                     <tr>
                                         <td>
                                             <label for="is_anonymous">{{__("zh_CN.is anonymous?")}}</label>
                                         </td>
                                         <td>
-                                            <input type="radio" name="is_anonymous" id="is_anonymous-1" value="1">{{__("zh_CN.anonymous")}}<br/>
-                                            <input type="radio" name="is_anonymous" id="is_anonymous-0" checked="checked" value="0">{{__("zh_CN.no anonymous")}}
+                                            <input type="radio" name="is_anonymous" id="is_anonymous-1" value="1" @checked(old('is_anonymous')==1) required>{{__("zh_CN.anonymous")}}<br/>
+                                            <input type="radio" name="is_anonymous" id="is_anonymous-0" value="0" @checked(old('is_anonymous')==0)>{{__("zh_CN.no anonymous")}}
                                         </td>
                                     </tr>
                                     <tr id="tr_partment">
@@ -38,9 +48,9 @@
                                             <label for="partment">{{__("zh_CN.partment")}}</label>
                                         </td>
                                         <td>
-                                            <select name="partment">
+                                            <select name="partment" required>
                                                 @foreach($partment as $p)
-                                                    <option value="{{ $p['id'] }}">{{ $p['name'] }}</option>
+                                                    <option value="{{ $p['id'] }}" @selected(old('partment') == $p['id'])>{{ $p['name'] }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -50,15 +60,15 @@
                                             <label for="starttime">{{__("zh_CN.start time")}}</label>
                                         </td>
                                         <td>
-                                            <input type="text" id="starttime"></p>
+                                            <input type="text" id="start_time" name="start_time" value="{{ old('start_time') }}" required></p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="endtime">{{__("zh_CN.end time")}}</label>
+                                            <label for="endtime" >{{__("zh_CN.end time")}}</label>
                                         </td>
                                         <td>
-                                            <input type="text" id="endtime"></p>
+                                            <input type="text" id="end_time" name="end_time" value="{{ old('end_time') }}" required></p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,18 +101,22 @@
                                     <div id="tabs-1">
                                       <table>
                                         <tr>
-                                            <td><label for="vote_title-1">{{__("zh_CN.title")}}</label></td>
-                                            <td><input type="text" id ="vote_title-1" name="vote_title-1" value="{{ old('vote_title-1') }}"></td>
+                                            <td><label>{{__("zh_CN.title")}}</label></td>
+                                            <td><input type="text" id ="vote_title-1" name="vote_title[]" value="{{ old('vote_title[0]') }}" required></td>
                                         </tr>
                                         <tr>
-                                            <td><label for="votelist_description-1">{{__("zh_CN.description")}}</label></td>
-                                            <td><textarea rows="5" cols="30" id="votelist_description-1" name="votelist_description-1">{{ old('votelist_description-1') }}</textarea></td>  
+                                            <td><label for="votelist_description[]">{{__("zh_CN.description")}}</label></td>
+                                            <td><textarea rows="5" cols="30" id="vote_description-1" name="vote_description[]" required>{{ old('vote_description[0]') }}</textarea></td>  
+                                        </tr>
+                                        <tr>
+                                            <td><label>{{__("zh_CN.selectable number")}}</label></td>
+                                            <td><input type="text" name="selectable_number[]" value="1" required></td>
                                         </tr>
                                         <tr>
                                             <td>{{__("zh_CN.vote option")}}</td>
                                             <td class='option'>
-                                                <input type="text" id ="vote_option-1-1" name="vote_option-1-1" value="{{ old('vote_option-1-1') }}">
-                                                <input type="text" id ="vote_option-1-2" name="vote_option-1-2" value="{{ old('vote_option-1-2') }}">
+                                                <input type="text" id ="vote_option-1-1" name="vote_option[0][]" value="{{ old('vote_option[0][0]]') }}" required>
+                                                <input type="text" id ="vote_option-1-2" name="vote_option[0][]" value="{{ old('vote_option[0][1]') }}" required>
                                                 <button id="add_option-1" class="ui-button ui-widget ui-corner-all option-add-button" title='add'>{{__("zh_CN.add option")}}</button>
                                                 
                                             </td>
@@ -113,11 +127,10 @@
                                       </table>
                                     </div>
                                 </div>
-                                
+                                <button type="submit"class="ui-button ui-widget ui-corner-all ">{{__("zh_CN.submit")}}</button>
                                 
                             </div>
                         </div> 
-                        <button type="submit">{{}}</button>
                     </form>
                 </div>
             </div>
@@ -131,19 +144,31 @@
         #tabs { margin-top: 1em; }
         #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
         #add_tab { cursor: pointer; }
+
+        #tabs input{display:block;}
     </style>
+    {{-- include datetimepicker js and css only in this page --}}
+    <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.css') }}">
+    <script src="{{ asset('js/jquery.datetimepicker.js') }}"></script>
+
+    {{-- include validate js only in this page --}}
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/messages_zh.min.js') }}"></script>
+
     <script>
             
         
         $(document).ready(function()
         {
+            $("#votelist_form").validate();
+            
             //vote create js
             $( function() 
             {
                 //datetime picker
                 jQuery.datetimepicker.setLocale('ch');
-                $( "#starttime" ).datetimepicker();
-                $( "#endtime" ).datetimepicker();
+                $( "#start_time" ).datetimepicker();
+                $( "#end_time" ).datetimepicker();
                 
                 //when anonymous selected partment hide
                 $("#is_anonymous-1").click(function () {
@@ -225,16 +250,21 @@
                     tabs.find( ".ui-tabs-nav" ).append( li );
                     tabs.append( "<div id='" + id + "'><table>"+
                         "<tr>"+
-                            "<td><label for='tab_title-"+tabCounter+"'>{{__("zh_CN.title")}}</label></td>"+
-                            "<td><input type='text' id ='vote_title-"+tabCounter+"' name='vote_title-"+tabCounter+"' value='"+tabTitleHtml+"'></td></tr><tr>"+
-                            "<td><label for='votelist_description-"+tabCounter+"'>{{__("zh_CN.description")}}</label></td>"+
-                            "<td><textarea rows='5' cols='30' id='votelist_description-"+tabCounter+"' name='votelist_description-"+tabCounter+"'>"+tabContentHtml +"</textarea></td>"+
+                            "<td><label>{{__("zh_CN.title")}}</label></td>"+
+                            "<td><input type='text' id ='vote_title-"+tabCounter+"' name='vote_title[]' value='"+tabTitleHtml+"' required></td></tr><tr>"+
+                            "<td><label>{{__("zh_CN.description")}}</label></td>"+
+                            "<td><textarea rows='5' cols='30' id='vote_description-"+tabCounter+"' name='vote_description[]' required>"+tabContentHtml +"</textarea></td>"+
+                        "</tr>"+
+                        "<tr>"+
+                            "<td><label>{{__("zh_CN.selectable number")}}</label></td>"+
+                            "<td><input type='text' name='selectable_number[]' value='1' required></td>"+
+
                         "</tr>"+
                         "<tr>"+
                             "<td>{{__("zh_CN.vote option")}}</td>"+
                             "<td class='option'>"+
-                                "<input type='text' id ='vote_option-"+tabCounter+"-1' name='vote_option-"+tabCounter+"-1' value=''>"+
-                                "<input type='text' id ='vote_option-"+tabCounter+"-2' name='vote_option-"+tabCounter+"-2' value=''>"+
+                                "<input type='text' id ='vote_option-"+tabCounter+"-1' name='vote_option["+(tabCounter-1)+"][]' value='' required>"+
+                                "<input type='text' id ='vote_option-"+tabCounter+"-2' name='vote_option["+(tabCounter-1)+"][]' value='' required>"+
                                 "<button id='add_option-"+tabCounter+"' class='ui-button ui-widget ui-corner-all option-add-button' title='add'>{{__("zh_CN.add option")}}</button>"+
                             "</td>"+
                         "</tr>"+
@@ -275,7 +305,7 @@
                     event.preventDefault();
                     $option_index = ($(this).parent().children("input").length)+1;
 
-                    $( this ).before("<input type='text' id ='vote_option-1-"+$option_index+"' name='vote_option-1-"+$option_index+"' value='{{ old('vote_option-1-"+$option_index+"') }}'>");
+                    $( this ).before("<input type='text' id ='vote_option-1-"+$option_index+"' name='vote_option[0][]' value='{{ old('vote_option["+($tab_index-1)+"]["+($option_index-1)+"]') }}' required>");
                     $option_index++;
                     
                     if($option_index>2 && !$( this ).next().is('button'))
@@ -305,13 +335,12 @@
                     {
                         event.preventDefault();
                         //get the tab id
-                        $input_id = $( this ).parent().children('input').attr("id");
+                        $input_id = $( this ).attr("id");
                         $tab_index_start = $input_id.indexOf('-')+1;
-                        $tab_index_end = $input_id.lastIndexOf('-');
-                        $tab_index = $input_id.slice($tab_index_start,$tab_index_end);
+                        $tab_index = $input_id.substr($tab_index_start);
                         $option_index = ($(this).parent().children("input").length)+1;
 
-                        $( this ).before("<input type='text' id ='vote_option-"+$tab_index+"-"+$option_index+"' name='vote_option-"+$tab_index+"-"+$option_index+"' value='{{ old('vote_option-"+$tab_index+"-"+$option_index+"') }}'>");
+                        $( this ).before("<input type='text' id ='vote_option-"+$tab_index+"-"+$option_index+"' name='vote_option["+($tab_index-1)+"][]' value='{{ old('vote_option["+($tab_index-1)+"]["+($option_index-1)+"]') }}' required>");
                         $option_index++;
                         if($option_index>2 && !$( this ).next().is('button'))
                         {
@@ -323,10 +352,9 @@
                     $(".option").delegate(".option-del-button","click",function(event)
                     {
                         event.preventDefault();
-                        $input_id = $( this ).parent().children('input').attr("id");
-                        $tab_index_start = input_id.indexOf('-')+1;
-                        $tab_index_end = $input_id.lastIndexOf('-');
-                        $tab_index = $input_id.slice($tab_index_start,$tab_index_end);
+                        $input_id = $( this ).attr("id");
+                        $tab_index_start = $input_id.indexOf('-')+1;
+                        $tab_index = $input_id.substr($tab_index_start);
                         $option_number = ($(this).parent().children("input").length);
                         $( '#vote_option-'+$tab_index+'-'+$option_number).remove();
                         $option_number--;
