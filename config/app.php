@@ -196,7 +196,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Clockwork\Support\Laravel\ClockworkServiceProvider::class,//clock work for debug
+        //Clockwork\Support\Laravel\ClockworkServiceProvider::class,//clock work for debug
 
     ],
 
@@ -213,7 +213,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Clockwork' => Clockwork\Support\Laravel\Facade::class,//clock work for debug
+        //'Clockwork' => Clockwork\Support\Laravel\Facade::class,//clock work for debug
     ])->toArray(),
     
 

@@ -153,8 +153,8 @@ return [
             //'TCG\\Voyager\\Widgets\\PostDimmer',
             //'TCG\\Voyager\\Widgets\\PageDimmer',
             'App\\Widgets\\UserDimmer',
-            'App\\Widgets\\PostDimmer',
-            'App\\Widgets\\PageDimmer',
+            //'App\\Widgets\\PostDimmer',
+            //'App\\Widgets\\PageDimmer',
         ],
 
     ],
@@ -197,16 +197,16 @@ return [
 
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
-        'css/jquery-ui.min.css',
-        'css/jquery-ui.theme.min.css',
+        //'css/jquery-ui.min.css',
+        //'css/jquery-ui.theme.min.css',
         //'jquery-ui.structure.min.css',
         //'css/bootstrap.min.css',
         //'css/bootstrap-theme.min.css',
     ],
 
     'additional_js' => [
-        'js/jquery-3.6.0.min.js',
-        'js/jquery-ui.min.js',
+        //'js/jquery-3.6.0.min.js',
+        //'js/jquery-ui.min.js',
         //'js/bootstrap.min.js',
     ],
 
