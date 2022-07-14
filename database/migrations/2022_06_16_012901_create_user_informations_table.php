@@ -17,7 +17,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_infomations', function (Blueprint $table) {
+        Schema::create('user_informations', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->boolean('is_anonymous')->default(false);//是否匿名
             $table->unsignedBigInteger('partment_id');//部门id
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_infomations');
+        Schema::dropIfExists('user_informations');
     }
 };

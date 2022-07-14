@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\UserPartment;
+use App\Models\UserInformation;
 use App\Models\Vote;
 
 class User extends \TCG\Voyager\Models\User
@@ -48,9 +48,9 @@ class User extends \TCG\Voyager\Models\User
     /**
      * 每个用户都有一个用户信息表
      */
-    public function userInfomation()
+    public function userInformation()
     {
-        return $this->hasOne(UserInfomation::class,'id','id');
+        return $this->hasOne(UserInformation::class,'id','id');
     }
 
     public function votes()

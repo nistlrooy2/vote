@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\VoyagerBaseController;
 use Illuminate\Http\Request;
-use App\Models\UserInfomation;
+use App\Models\UserInformation;
 
-class UserInfomationController extends VoyagerBaseController
+class UserInformationController extends VoyagerBaseController
 {
     
     /**
@@ -13,7 +13,7 @@ class UserInfomationController extends VoyagerBaseController
      */
     public function indexall(Request $request)
     {
-        $partment = UserInfomation::get();
+        $partment = UserInformation::get();
         return dump($partment);
     }
 }

@@ -10,7 +10,7 @@ use App\Models\Vote;
 use App\Models\VoteOption;
 use App\Models\VoteResult;
 use App\Models\VoteUser;
-use App\Models\UserInfomation;
+use App\Models\UserInformation;
 use App\Models\VoteWeight;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserPartment;
@@ -25,8 +25,20 @@ class VoteListController extends VoyagerBaseController
      */
     public function voteListIndex($id)
     {
+        $user = Auth::user();
+        $user_information = $user->userInformation()->first();
+
+        $user_is_anonymous = $user_information['is_anonymous'];
+
         $voteList = VoteList::where('id',$id)
                         ->first();
+        $is_anonymous = $voteList['is_anonymous'];
+
+        if($user_is_anonymous != $is_anonymous)
+        {
+            abort(403,"匿名与非匿名投票不可混投");
+        }
+
         $vote = $voteList->vote()->get();
         $option = collect([]);
         foreach($vote as $v)
@@ -143,7 +155,7 @@ class VoteListController extends VoyagerBaseController
                 //if don't have the user_weight info,get the weight through the Model
                 if(!isset($user_weight[$user_id]))
                 {
-                    $position_level_id = (UserInfomation::where('id',$user_id)->first())['position_level_id'];
+                    $position_level_id = (UserInformation::where('id',$user_id)->first())['position_level_id'];
                     
                     $user_weight[$user_id] = (VoteWeight::where('id',$position_level_id)->first())['weight'];
                 }

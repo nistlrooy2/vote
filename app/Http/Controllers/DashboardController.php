@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\VoteList;
 use App\Models\UserPartment;
-use App\Models\UserInfomation;
+use App\Models\UserInformation;
 use App\Models\VoteUser;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,17 +18,17 @@ class DashboardController extends Controller
     {
         // get the current userInfo
         $user = Auth::user();
-        $userInfo = $user->userInfomation()->first();
+        $userInfo = $user->userInformation()->first();
         //if current user doesn't have userinfo , create the info
         if(!$userInfo)
         {
-            $newUserInfo = new UserInfomation(['id'=>Auth::id(),
+            $newUserInfo = new UserInformation(['id'=>Auth::id(),
                                                 'is_anonymous'=>0,
                                                 'partment_id'=>0,//no partment
                                                 'position_level_id'=>0]);//no position level
-            $user->userInfomation()->save($newUserInfo);
+            $user->userInformation()->save($newUserInfo);
             $user->refresh();
-            $userInfo = $user->userInfomation()->first();
+            $userInfo = $user->userInformation()->first();
         }
         
         // is Anonymous?

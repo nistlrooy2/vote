@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Http\Requests\CreateAnonymousRequest;
 use App\Exports\AnonymousExport;
-use App\Models\UserInfomation;
+use App\Models\UserInformation;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -78,7 +78,7 @@ class VoyagerUserController extends BaseVoyagerUserController
 
                     $user_id = $user->id;
 
-                    $user_info = UserInfomation::create([
+                    $user_info = UserInformation::create([
                         'id' => $user_id,
                         'is_anonymous' => 1,
                         'partment_id' => 0,

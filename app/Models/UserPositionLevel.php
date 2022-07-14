@@ -12,8 +12,8 @@ class UserPositionLevel extends Model
     /**
      * level belongs to userInfo
      */
-    public function userInfomation()
+    public function userInformation()
     {
-        return $this->hasMany(UserInfomation::class,'position_level_id','id');
+        return $this->hasMany(UserInformation::class,'position_level_id','id');
     }
 }

@@ -13,9 +13,9 @@ class UserPartment extends Model
     /**
      * partment belongs to userInfo
      */
-    public function userInfomation()
+    public function userInformation()
     {
-        return $this->hasMany(UserInfomation::class,'partment_id','id');
+        return $this->hasMany(UserInformation::class,'partment_id','id');
     }
 
     /**
