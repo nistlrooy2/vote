@@ -46,5 +46,10 @@ return [
     'create and export anonymous'=>'生成并导出匿名账号',
     'anonymous list'=>'匿名账户表',
     'anonymous'=>'匿名账户',
+    'Email'=>'邮箱',
+    'Password'=>'密码',
+    'Remember me'=>'记住我',
+    'Forgot your password?'=>'忘记密码（未启用）',
+    'Log in'=>'登录',
     
 ];
